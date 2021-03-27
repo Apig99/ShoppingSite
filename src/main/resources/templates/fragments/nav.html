@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="nav-front" xmlns:th="http://www.thymeleaf.org">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Shopping Cart</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active" th:each="page: ${cPages}" th:if="${page.slug != 'home'}">
+                    <a class="nav-link" th:href="@{'/' + ${page.slug}}" th:text="${page.title}"></a>
+                </li>
+            </ul>
+
+            <ul style="margin-left: 75%" class="navbar-nav" th:if="${principal == null}">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/register}">Register</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+
+            <ul style="margin-left: 75%" class="navbar-nav">
+            <form th:if="${principal != null}" method="post" th:action="@{/logout}">
+                <span class="text-white" th:text="${'Hi, ' + principal }"></span>
+                <button class="btn btn-secondary">Logout</button>
+            </form>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ================================= -->
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="nav-admin" xmlns:th="http://www.thymeleaf.org">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/" target="_blank">Home Page</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin/pages">Pages</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin/categories">Categories</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin/products">Products</a>
+                </li>
+            </ul>
+            <ul style="margin-left: 70%" class="navbar-nav">
+                <form th:if="${principal != null}" method="post" th:action="@{/logout}">
+                    <span class="text-white" th:text="${'Hi, ' + principal }"></span>
+                    <button class="btn btn-secondary">Logout</button>
+                </form>
+            </ul>
+        </div>
+    </div>
+</nav>
